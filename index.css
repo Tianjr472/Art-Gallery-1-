@@ -1,0 +1,224 @@
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+}
+
+body {
+    background-color: #050505;
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    overflow: hidden; 
+}
+
+/* =========================================
+   🎮 连续渐变的动态背景层
+   ========================================= */
+.dynamic-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    /* 去掉了 transition，因为 JS 每一帧都在计算颜色，不需要 CSS 补间了，更丝滑 */
+}
+.bg-overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 40%, #000 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* =========================================
+   🕒 贯穿全屏的时间轴
+   ========================================= */
+.timeline-main-line {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    width: 100vw;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.05);
+    z-index: 2;
+}
+/* 跟随滑动的白色发光进度条 */
+.timeline-progress {
+    height: 100%;
+    width: 0%;
+    background-color: #fff;
+    box-shadow: 0 0 15px #fff;
+    transition: width 0.1s linear;
+}
+
+/* =========================================
+   核心：横向自由长卷轴
+   ========================================= */
+.horizontal-scroll-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    position: relative;
+    z-index: 3;
+    
+    /* 👈 核心改动：去掉了 scroll-snap-type，变成自由丝滑滚动 */
+    scroll-behavior: smooth;
+}
+.horizontal-scroll-container::-webkit-scrollbar { display: none; }
+
+/* =========================================
+   节点区域 & 首尾页
+   ========================================= */
+.node-section {
+    flex: 0 0 auto;
+    height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    padding: 0 5vw;
+}
+
+.intro-node, .outro-node {
+    flex: 0 0 100vw; /* 依然占据满屏 */
+    flex-direction: column;
+    text-align: center;
+    /* 👈 删掉了原来的 background: radial-gradient(...) */
+    /* 让它们也透明，这样就能看到后面 JS 算出来的纯色背景了 */
+    background: transparent; 
+    /* 确保字在最上面 */
+    position: relative; 
+    z-index: 5;
+}
+
+.intro-text {
+    /* 稍微给文字一点阴影，防止在浅色背景上看不清 */
+    text-shadow: 0 5px 20px rgba(0, 0, 0, 0.8); 
+}
+
+.intro-text h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 6vw; 
+    line-height: 1.1; 
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.intro-text p { 
+    color: #aaa; 
+    letter-spacing: 3px; 
+    font-size: 1.1rem;
+}
+
+/* =========================================
+   节点区域
+   ========================================= */
+.node-section {
+    flex: 0 0 auto;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* 时间线上的点 */
+.timeline-dot {
+    position: absolute;
+    top: calc(50% - 6px); /* 卡在中线上 */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px; height: 12px;
+    background-color: #333;
+    border: 2px solid #555;
+    border-radius: 50%;
+    z-index: 4;
+    transition: all 0.3s;
+}
+/* 激活时的点 */
+.timeline-dot.active {
+    background-color: #fff;
+    border-color: #fff;
+    box-shadow: 0 0 20px #fff;
+    transform: translateX(-50%) scale(1.5);
+}
+
+/* =========================================
+   UI 面板 (聚拢，悬浮，毛玻璃)
+   ========================================= */
+.ui-panel {
+    display: flex;
+    align-items: center;
+    gap: 3vw;
+    width: 70vw;
+    max-width: 1000px;
+    
+    background: rgba(10, 10, 10, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 4vh 4vw;
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    
+    /* 让 UI 悬浮在时间轴上层 */
+    position: relative;
+    z-index: 5;
+}
+
+.img-wrapper {
+    flex: 1;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.img-wrapper img {
+    max-width: 100%; max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 25px rgba(0,0,0,0.9));
+}
+
+.text-content {
+    flex: 1;
+}
+
+.chapter-num { font-size: 0.9rem; color: #888; letter-spacing: 4px; margin-bottom: 10px; display: block;}
+.text-content h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 3.5vw;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+.text-content p {
+    font-size: 1rem; line-height: 1.8; color: #ccc;
+    margin-bottom: 40px;
+}
+
+.explore-btn {
+    display: inline-block; 
+    padding: 15px 35px;
+    color: #fff; text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    letter-spacing: 2px; transition: all 0.3s;
+    background: transparent;
+}
+.explore-btn:hover {
+    background: #fff; color: #000;
+    border-color: #fff;
+}
+
+/* 📱 手机端适配 */
+@media screen and (max-width: 768px) {
+    .ui-panel {
+        flex-direction: column;
+        gap: 2vh;
+        width: 85vw;
+        height: 80vh;
+        padding: 3vh 3vw;
+        justify-content: space-around;
+    }
+    .img-wrapper { height: 35vh; }
+    .text-content { text-align: center; }
+    .text-content h2 { font-size: 2.5rem; margin-bottom: 10px; }
+    .explore-btn { padding: 10px 25px; }
+    /* 手机端隐藏时间轴上的点，避免屏幕太小挡住字 */
+    .timeline-dot { display: none; }
+}

@@ -1,0 +1,326 @@
+/* =========================================
+   全局设置 & 字体
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #050505; /* 极夜黑 */
+    color: #d1d5db; /* 银灰文字，比纯白更高级 */
+    font-family: 'Inter', sans-serif;
+    
+    /* 开启瀑布流吸附 */
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100vh;
+}
+
+/* =========================================
+   瀑布流区块布局 (左右交错排版)
+   ========================================= */
+.content-section {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8vw; /* 左右间距 */
+    padding: 0 10vw;
+    
+    /* 每次滚动停靠在这里 */
+    scroll-snap-align: start; 
+}
+
+/* 偶数屏反向排版 (图在左，文在右) */
+.reverse-layout {
+    flex-direction: row-reverse;
+}
+
+/* =========================================
+   文字排版区域
+   ========================================= */
+.text-container {
+    flex: 1; /* 占据剩余空间 */
+    max-width: 500px;
+}
+
+.section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 3.5rem;
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    color: #6b7280; /* 暗灰色标签 */
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #9ca3af;
+    font-weight: 300;
+}
+
+/* 科隆大教堂特有的列表样式 */
+.feature-list {
+    list-style: none;
+    margin-top: 30px;
+}
+.feature-list li {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #e5e7eb;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.feature-list span {
+    color: #4b5563;
+    font-size: 0.8rem;
+}
+
+/* =========================================
+   图片容器区域
+   ========================================= */
+.image-container {
+    flex: 1;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* 核心滤镜：降低亮度，提高对比度，边缘加一点暗角阴影，完美融入黑背景 */
+    filter: brightness(0.7) contrast(1.2);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255,255,255,0.05); /* 极细的边框 */
+}
+
+
+
+/* =========================================
+   左上角：极简多级返回导航
+   ========================================= */
+.top-left-nav {
+    position: fixed;
+    top: 40px;
+    left: 50px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+}
+
+.back-btn {
+    color: #9ca3af;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.back-btn:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
+/* 箭头悬停动画 */
+.back-btn .arrow {
+    transition: transform 0.3s ease;
+}
+.back-btn:hover .arrow {
+    transform: translateX(-4px);
+}
+
+/* 中间的斜杠分割线 */
+.nav-divider {
+    color: #4b5563; /* 暗灰色，不抢眼 */
+    font-size: 0.9rem;
+    user-select: none; /* 防止被鼠标选中 */
+}
+
+
+/* =========================================
+   右侧时间轴导航 (极简圆点)
+   ========================================= */
+.side-nav {
+    position: fixed;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+}
+
+.side-nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: flex-end; /* 圆点靠右对齐 */
+}
+
+.nav-dot {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-decoration: none;
+    position: relative;
+    height: 20px;
+}
+
+/* 默认是小圆点 */
+.nav-dot::after {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.2);
+    transition: all 0.4s ease;
+}
+
+/* 文字标签平时隐藏 */
+.nav-dot span {
+    position: absolute;
+    right: 25px; /* 文字在圆点左边 */
+    color: #d1d5db;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: all 0.4s ease;
+    pointer-events: none;
+}
+
+
+
+.fixed-mirror-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 0; /* 永远垫在最底层 */
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.fixed-mirror-bg img {
+    position: absolute;
+    height: 85vh; /* 教堂高度，可以根据你的素材微调 */
+    width: auto;
+    /* 核心：极度压暗，让它成为幽灵般的背景，不抢正文风头 */
+    filter: brightness(0.15) contrast(1.5) drop-shadow(0 0 50px #000); 
+}
+
+/* 左下角 */
+.spire-left {
+    bottom: -10vh; 
+    left: -5vw;
+}
+
+/* 右上角：倒立放置 */
+.spire-right {
+    top: -10vh; 
+    right: -5vw;
+    transform: scaleY(-1); /* 垂直翻转 */
+}
+
+/* 初始状态：容器高度为0，图片略微放大 */
+.image-container {
+    clip-path: inset(0 0 100% 0); /* 从底部裁切，初始不可见 */
+    transition: clip-path 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.image-container img {
+    transform: scale(1.1);
+    transition: transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* 触发状态：裁切解除，图片缩小回正常 */
+.content-section.active .image-container {
+    clip-path: inset(0 0 0 0); /* 完全展开 */
+}
+
+.content-section.active .image-container img {
+    transform: scale(1);
+}
+
+
+/* 在 CSS 最后加上这段 */
+@keyframes textReveal {
+    0% { opacity: 0; transform: translateY(20px); filter: blur(5px); }
+    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+/* 给文字容器加上触发类 */
+.text-container {
+    /* 默认隐藏 */
+    opacity: 0; 
+}
+
+/* 当这个 section 进入视口时，触发动画 */
+.content-section.active .text-container {
+    animation: textReveal 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* 让段落比标题稍微晚一点点出来，形成层次 */
+.content-section.active .description,
+.content-section.active .feature-list {
+    animation: textReveal 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
+    opacity: 0; /* 初始隐藏，等待动画 */
+}
+
+.nav-dot.active::after {
+    background-color: #fff;
+    border-color: #fff;
+    box-shadow: 0 0 0 0 rgba(255,255,255,0.7); /* 初始光环 */
+    animation: nodeGlow 1s ease-out; /* 每次激活时闪烁一下 */
+}
+
+@keyframes nodeGlow {
+    0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.7); transform: scale(1.5); }
+    70% { box-shadow: 0 0 0 15px rgba(255,255,255,0); transform: scale(1.2); }
+    100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); transform: scale(1); }
+}
+
+@keyframes breatheFloat {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0); }
+}
+
+.spire-left {
+    animation: breatheFloat 8s ease-in-out infinite;
+}
+
+/* 右上角：既要倒立，又要漂浮 */
+@keyframes breatheFloatRight {
+    0% { transform: scaleY(-1) translateY(0); }
+    50% { transform: scaleY(-1) translateY(-15px); }
+    100% { transform: scaleY(-1) translateY(0); }
+}
+
+.spire-right {
+    animation: breatheFloatRight 8s ease-in-out infinite;
+}

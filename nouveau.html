@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Nouveau — The Moodboard</title>
+    <!-- 字体引入和上一页一样 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="nouveau.css">
+</head>
+<body class="nouveau-theme">
+
+    <!-- 1. 顶部导航栏 -->
+    <nav class="top-nav">
+        <div class="nav-logo">ART NOUVEAU</div>
+        <div class="nav-links">
+            <!-- 这里的 href 填你主页的文件名 -->
+            <a href="index.html">← HOME</a> 
+            <a href="mucha.html" class="active">MUCHA</a>
+            <!-- 你可以以后再加别的 -->
+        </div>
+    </nav>
+
+
+    <!-- 2. 引言区 (首屏 - 毛玻璃博物馆效果) -->
+    <header class="intro-section">
+
+    <!-- 👇 新增：背景画作拼贴层 -->
+    <div class="gallery-backdrop" aria-hidden="true">
+        <!-- 你可以把你别的图放进来，这里用 4 张图拼贴打个样 -->
+        <img src="Mucha images/Mucha char 7 .png.webp" alt="">
+        <img src="Mucha images/Mucha char 5 .png.webp" alt="">
+        <img src="Nouveau/Nouveau (1).png" alt="">
+        <img src="Nouveau/Aprille(2).png" alt="">
+    </div>
+
+    <!-- 文字内容需要提升层级，把它包起来 -->
+    <div class="intro-content">
+        <h1>A REVOLUTION<br>OF LINES & NATURE</h1>
+        <p>New Art. Not just a style, but a way of breathing life into everyday objects. We don't educate, we simply share the beauty.</p>
+        <div class="scroll-down-hint">SCROLL TO EXPLORE ↓</div>
+    </div>
+
+</header>
+
+    <!-- 3. 画家线索板区 -->
+    <main class="moodboard">
+        
+        <!-- 第一个画家：穆夏 -->
+        <section class="artist-block">
+            <div class="glow-bg"></div>
+
+            <div class="img-container">
+                <img class="mucha-art" src="Mucha images/Mucha char 7 .png.webp" alt="Mucha Art">
+            </div>
+    
+            <div class="text-container">
+                <!-- 01 保留，用华丽花体 -->
+                <span class="num script-font">01.</span>
+        
+                <!-- ? 核心：把标题拆碎，用 span 包起来 -->
+                <h2 class="shattered-title">
+                    <span class="word1">The</span>
+                    <span class="word2">Master</span>
+                    <span class="word3">of</span>
+                    <span class="word4">Elegance</span>
+                </h2>
+        
+                <p>Alphonse Mucha. Known for his graceful women and floral halos. He turned advertising into art, merging commerce with pure poetry.</p>
+            </div>
+        </section>
+
+        <!-- 第二个画家：克里姆特 (金灿灿的) -->
+        <section class="artist-block reverse">
+            <div class="img-container">
+                <img class="mucha-art" src="Nouveau/Nouveau (2).png" alt="">
+            </div>
+            <div class="text-container">
+                <span class="num">02.</span>
+                <h2>The Golden Obsession</h2>
+                <p>Gustav Klimt. Taking Art Nouveau to the extremes of gold leaf, mosaics, and intense emotion. Not just flowers, but geometry and flesh.</p>
+            </div>
+        </section>
+
+        
+
+        <!-- 第三个画家：比亚兹莱 (黑白线稿) -->
+        <section class="artist-block">
+            <div class="img-container">
+                <img class="mucha-art" src="Nouveau/Aprille(1).png" alt="">
+            </div>
+            <div class="text-container">
+                <span class="num">03.</span>
+                <h2>Black & White Provocation</h2>
+                <p>Aubrey Beardsley. Stripping away the color, leaving only bold, seductive, and sometimes grotesque lines. Inspired by Japanese Ukiyo-e.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 4. 底部 -->
+    <footer class="page-footer">
+        <p>Designed for the Web History Project</p>
+        <a href="index.html" class="back-home">Return to Gallery</a>
+    </footer>
+</body>
+</html>

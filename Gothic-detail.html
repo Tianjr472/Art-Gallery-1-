@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gothic - The Dark Aesthetic</title>
+    <link rel="stylesheet" href="Gothic-detail.css">
+    <!-- 引入高雅排版字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- 左上角：返回导航菜单 -->
+    <div class="top-left-nav">
+        <a href="index.html" class="back-btn">
+            <span class="arrow">←</span> MAIN INDEX
+        </a>
+        <span class="nav-divider">/</span>
+        <a href="Gothic.html" class="back-btn">
+            GOTHIC ARCHIVE
+        </a>
+    </div>
+
+    <!-- 右侧：悬浮时间轴导航 -->
+    <nav class="side-nav">
+        <ul>
+            <li><a href="#origin" class="nav-dot active"><span>01. Origin</span></a></li>
+            <li><a href="#cologne" class="nav-dot"><span>02. Cologne Cathedral</span></a></li>
+            <li><a href="#victorian" class="nav-dot"><span>03. Victorian</span></a></li>
+            <li><a href="#fashion" class="nav-dot"><span>04. Modern Fashion</span></a></li>
+        </ul>
+    </nav>
+
+    <!-- ========================================== -->
+    <!-- 第一屏：起源 (The Origin) -->
+    <!-- ========================================== -->
+    <section id="origin" class="content-section" 
+    style="position: relative; overflow: hidden;">
+
+    <!-- 贯穿全屏的固定背景（镜像双塔） -->
+    <div class="fixed-mirror-bg">
+        <!-- 左下角正常的教堂 -->
+        <img class="spire-left" src="Gothic images/church(4).png" alt="Normal Spire">
+        <!-- 右上角倒立的教堂 -->
+        <img class="spire-right" src="Gothic images/church(4).png" alt="Inverted Spire">
+    </div>
+
+        <div class="text-container">
+            <h1 class="section-title">The Genesis</h1>
+            <p class="subtitle">12TH CENTURY • FRANCE</p>
+            <p class="description">
+                Emerging in the 12th century, Gothic architecture was a radical departure from the heavy Romanesque style. While this era also produced remarkable illuminated manuscripts and panel paintings, the true genius of the period lies in its architecture. The grand cathedrals—with their soaring spires and ethereal light—completely overshadowed contemporary painting, defining the visual identity of the age.
+            </p>
+        </div>
+        <!-- 找一张早期的哥特建筑图，比如巴黎圣母院或者圣但尼圣殿 -->
+        <div class="image-container">
+            <img src="Gothic images/church(5).jpg" alt="Early Gothic Architecture">
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 第二屏：科隆大教堂 (Cologne Cathedral) -->
+    <!-- ========================================== -->
+    <section id="cologne" class="content-section reverse-layout">
+        <div class="text-container">
+            <h1 class="section-title">Cologne Cathedral</h1>
+            <p class="subtitle">THE PINNACLE OF GOTHIC</p>
+            <p class="description">
+                A masterpiece of High Gothic architecture. Cologne Cathedral stands as a monumental testament to the structural genius of the era, featuring soaring twin spires, complex flying buttresses, and towering pointed arches that dominate the skyline.
+            </p>
+            <ul class="feature-list">
+                <li><span>◆</span> Pointed Arches</li>
+                <li><span>◆</span> Flying Buttresses</li>
+                <li><span>◆</span> Stained Glass</li>
+            </ul>
+        </div>
+        <!-- 找一张极其宏伟的科隆大教堂照片（最好是黑白或低饱和度） -->
+        <div class="image-container">
+            <img src="Gothic images/Cologne-Cathedral.jpg" alt="Cologne Cathedral">
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 第三屏：维多利亚哥特 (Victorian Gothic) -->
+    <!-- ========================================== -->
+    <section id="victorian" class="content-section">
+        <div class="text-container">
+            <h1 class="section-title">Victorian Gothic</h1>
+            <p class="subtitle">19TH CENTURY • REVIVAL</p>
+            <p class="description">
+                The 19th-century Gothic Revival was deeply intertwined with the era of Queen Victoria. Unlike its medieval predecessor, this movement was no longer just about religious devotion; it became a profoundly personal expression of the macabre and the melancholic. This aesthetic found its most striking manifestation not in stone, but in fashion. The elaborate black mourning dresses, heavy veils, and somber elegance—popularized by the Queen's own lifelong mourning—transformed Gothic into a deeply human, wearable aesthetic.
+            </p>
+        </div>
+        <!-- 找一张维多利亚哥特式建筑（比如伦敦的国会大厦，或者暗黑风的古堡） -->
+        <div class="image-container">
+            <img src="Gothic images/Victoria.jpg" alt="Victorian Gothic Architecture">
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 第四屏：现代哥特穿搭 (Modern Fashion) -->
+    <!-- ========================================== -->
+    <section id="fashion" class="content-section reverse-layout">
+        <div class="text-container">
+            <h1 class="section-title">The Modern Era</h1>
+            <p class="subtitle">GOTHIC FASHION</p>
+            <p class="description">
+                In contemporary culture, Gothic has evolved into a highly influential fashion subculture. Designers like John Galliano have masterfully translated the architectural severity of the past into wearable art. Through high-contrast textures, intricate lace, and theatrical silhouettes, the modern Gothic aesthetic celebrates the beauty of the macabre—turning the darkness of history into a striking personal statement.
+            </p>
+        </div>
+        <!-- 找一张你喜欢的黑白哥特穿搭图 -->
+        <div class="image-container">
+            <img src="Gothic images/Fashion.jpg" alt="Gothic Fashion">
+        </div>
+    </section>
+
+    <script>
+
+        // 监听滚动，让元素出现
+    const sections = document.querySelectorAll('.content-section');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            // 如果这个区块进入了屏幕视野
+            if (entry.isIntersecting) {
+                // 加上 active 类，这就像按下了开关，CSS 里写的动画就会开始播放
+                entry.target.classList.add('active');
+            }
+            });
+        }, {
+            threshold: 0.2 // 只要露出 20% 就开始播放
+        });
+
+    sections.forEach(section => revealObserver.observe(section));
+
+
+    // -------------------------
+    // 下面是你原本用来让右侧圆点亮起的代码
+    // -------------------------
+    const navDots = document.querySelectorAll('.nav-dot');
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5 
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navDots.forEach(dot => dot.classList.remove('active'));
+                const id = entry.target.getAttribute('id');
+                document.querySelector(`.nav-dot[href="#${id}"]`).classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>

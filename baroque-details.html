@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- 引入高级字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="details.css">
+    <title>The Baroque Era</title>
+<body>
+
+    <!-- 1. 顶部导航栏 -->
+    <nav class="navbar">
+        <!-- 回到你最初的首页 -->
+        <a href="index.html" class="nav-home">← HOME</a>
+        <!-- 回到我们刚做的华丽威尼斯页 -->
+        <a href="venice.html">Back to Venice</a>
+    </nav>
+
+
+    <!-- 2. 大屏背景与标题 -->
+    <!-- 保留 fade-up 动画，但换成新的 class 名字 -->
+    <header class="hero-section fade-up">
+    
+        <!-- 这是一个空盒子，专门用来放背景图 -->
+        <div class="hero-bg-image"></div>
+    
+        <!-- 文字层 -->
+        <div class="hero-content">
+            <h1>The Baroque Era</h1>
+            <p>"A world of intense light, deep shadows, and unrestrained emotion."</p>
+        </div>
+    
+    </header>
+
+    <!-- 3. 发展历史 (长文本) -->
+    <section class="section-text fade-up delay-1">
+        <h2>The Evolution of Grandeur</h2>
+        <p>
+            Emerging in Rome in the early 17th century, the Baroque style was born out of a desire for grandeur and drama. Following the Renaissance's focus on perfect proportion and harmony, the Baroque broke the rules. It was a style designed to evoke awe, overwhelming the viewer with scale, movement, and theatricality.
+        </p>
+        <p>
+            The Catholic Church, responding to the Protestant Reformation, utilized Baroque art and architecture as a form of visual propaganda—a way to draw people back to the faith by creating churches that felt like portals to heaven. From Italy, the style spread rapidly across Europe, evolving into different regional flavors, from the lavish palaces of France to the dark, emotional paintings of the Dutch Golden Age.
+        </p>
+    </section>
+
+    <!-- 4. 绘画与建筑的交响 (左图右文，交替排列) -->
+    <section class="art-architecture-section">
+        
+        <!-- 第一排：绘画作品 (宫娥) -->
+        <div class="art-row fade-up">
+            <div class="art-image-container">
+                <!-- 替换为你自己的宫娥图片路径 -->
+                <img src="Baroque images/art(1).jpg" alt="Las Meninas">
+            </div>
+            <div class="art-text">
+                <h3>Las Meninas</h3>
+                <div class="artist">Diego Velázquez, 1656</div>
+                <p>
+                    Unlike the highly ornate architecture of the time, Baroque painting often subverted expectations. Velázquez's masterpiece creates a complex, almost cinematic reality. It plays with light and shadow (chiaroscuro) and forces the viewer to question who is looking at whom. It is a painting of immense depth, where the true subject is the act of observation itself.
+                </p>
+            </div>
+        </div>
+
+        <!-- 第二排：绘画作品 (夜巡) - 左右反转 -->
+        <div class="art-row reverse fade-up">
+            <div class="art-image-container">
+                <!-- 替换为你自己的夜巡图片路径 -->
+                <img src="Baroque images/art.png" alt="The Night Watch">
+            </div>
+            <div class="art-text">
+                <h3>The Night Watch</h3>
+                <div class="artist">Rembrandt van Rijn, 1642</div>
+                <p>
+                    Rembrandt's iconic work is a masterclass in dramatic lighting. The scene emerges from a deep, almost swallowing darkness. The light doesn't just illuminate; it tells a story, highlighting the action and creating a sense of explosive movement. Here, the "Baroque" is not about gold ornaments, but about the intense, theatrical manipulation of light and human emotion.
+                </p>
+            </div>
+        </div>
+
+        <!-- 第三排：建筑 - 用你之前的素材或者找张图 -->
+        <div class="art-row fade-up">
+            <div class="art-image-container">
+                <!-- 替换为巴洛克建筑图片 (比如凡尔赛宫或圣彼得大教堂) -->
+                <img src="Baroque images/background(1).png" alt="Baroque Architecture">
+            </div>
+            <div class="art-text">
+                <h3>Architecture of Power</h3>
+                <div class="artist">The Visual Theater</div>
+                <p>
+                    In contrast to the dark, intimate canvases of Rembrandt, Baroque architecture was designed to be seen in bright daylight. It is characterized by massive domes, sweeping curves, twisted columns, and an abundance of gold. It is a physical manifestation of power and wealth, meant to make the individual feel small in the presence of greatness.
+                </p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- 5. 底部对比 (画廊交错排版) -->
+    <section class="comparison-section">
+        <div class="gallery-wrapper">
+
+            <!-- --- 左侧：巴洛克区块 --- -->
+            <div class="era-block fade-up">
+                <div class="era-header">
+                    <h2>Baroque</h2>
+                    <span>The Age of Drama</span>
+                </div>
+
+                <div class="era-content">
+                    <!-- 大图 -->
+                    <div class="era-main-image">
+                        <img src="Baroque images/art.png" alt="The Night Watch">
+                        <p class="img-caption">The Night Watch (Rembrandt)</p>
+                    </div>
+
+                    <!-- 侧边/下方的文字列表 -->
+                    <ul class="era-list">
+                        <li><strong>Mood</strong> Dramatic, intense, religious.</li>
+                        <li><strong>Light</strong> Chiaroscuro (high contrast).</li>
+                        <li><strong>Colors</strong> Deep reds, golds, heavy shadows.</li>
+                        <li><strong>Focus</strong> Grandeur and power.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- --- 右侧：洛可可区块 --- -->
+            <div class="era-block rococo fade-up delay-1">
+                <div class="era-header">
+                    <h2>Rococo</h2>
+                    <span>The Age of Elegance</span>
+                </div>
+
+                <div class="era-content">
+                    <!-- 两张图并排 (如果屏幕窄会自动上下) -->
+                    <div class="era-img-group">
+                        <div class="era-main-image">
+                            <img src="Baroque images/art(4).jpg" alt="The Swing">
+                            <p class="img-caption">The Swing (Fragonard)</p>
+                        </div>
+                        <div class="era-main-image">
+                            <img src="Baroque images/art(3).jpg" alt="Madame de Pompadour">
+                            <p class="img-caption">Madame de Pompadour (Boucher)</p>
+                        </div>
+                    </div>
+
+                    <!-- 专属引言 -->
+                    <p class="era-quote">
+                        * Madame de Pompadour, the influential mistress of King Louis XV, was a major patron and trendsetter. She played a pivotal role in popularizing the Rococo style across European courts.
+                    </p>
+
+                    <ul class="era-list">
+                        <li><strong>Mood</strong> Playful, elegant, intimate.</li>
+                        <li><strong>Light</strong> Soft, even, no harsh shadows.</li>
+                        <li><strong>Colors</strong> Pastels (pink, mint, light gold).</li>
+                        <li><strong>Focus</strong> Aristocratic leisure and romance.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+ 
+
+</body>
+</html>

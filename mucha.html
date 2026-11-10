@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Art Nouveau — Alphonse Mucha</title>
+
+    <!-- 引入优雅的英文字体 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="mucha.css">
+</head>
+
+<body class="mucha-theme">
+
+    <main class="gallery">
+
+        <!-- 1. 背景层：三张图拼贴的墙面 -->
+        <div class="wall-grid" aria-hidden="true">
+            <div class="wall-tile tile-1">
+                <img src="Mucha images/Mucha background 5 .png.webp" alt="">
+            </div>
+            <div class="wall-tile tile-2">
+                <img src="Mucha images/Mucha background 6 .png.webp" alt="">
+            </div>
+            <div class="wall-tile tile-3">
+                <img src="Mucha images/Mucha background 1 .png.webp" alt="">
+            </div>
+        </div>
+        <!-- 遮罩层：让背景暗下来，聚焦人物 -->
+        <div class="ambient-overlay" aria-hidden="true"></div>
+
+        <!-- ================= 核心拼贴人物 ================= -->
+
+        <!-- 左侧护法 -->
+        <figure class="artwork artwork-left">
+            <img src="Mucha images/Mucha char 2  (2).png.png" alt="Left Woman">
+        </figure>
+
+        <!-- 中间 C 位 -->
+        <figure class="artwork artwork-center">
+            <img src="Mucha images/Mucha char 6 .png.webp" alt="Center Woman">
+        </figure>
+
+        <!-- 右侧护法 -->
+        <figure class="artwork artwork-right">
+            <img src="Mucha images/Mucha char 8 (2).png.png" alt="Right Woman">
+        </figure>
+
+        <!-- 边缘浮动碎片 -->
+        <div class="fragment frag-left" aria-hidden="true">
+            <img src="Mucha images/Mucha char 3 .png.png" alt="">
+        </div>
+        <div class="fragment frag-right" aria-hidden="true">
+            <img src="Mucha images/Mucha char 4 .png.png" alt="">
+        </div>
+
+        <div class="fragment frag-lili" aria-hidden="true">
+            <img src="Mucha images/Mucha Material Flower(1)  .png.png" alt = "">
+        </div>
+
+        <!-- ================= 文字层 ================= -->
+
+        <!-- 顶部标签 -->
+        <header class="gallery-header">
+            <span class="eyebrow">A JOURNEY THROUGH ART HISTORY</span>
+    
+            <!-- 加一个极细的金色分割线 -->
+            <div class="header-line"></div>
+    
+            <!-- 用不同大小的英文错落排版，填补空白 -->
+            <div class="header-text-block">
+                <p>CHAPTER 01 // 1890s</p>
+                <h3>THE AGE OF<br>ORNAMENT</h3>
+                <span class="tiny-text">ALPHONSE MUCHA & THE ART NOUVEAU</span>
+            </div>
+        </header>
+
+        <!-- 右下角文字面板 -->
+        <section class="intro-panel">
+            <p class="intro-kicker">THE FIRST CHAPTER · 1890s</p>
+            <h1>ART NOUVEAU</h1>
+            <div class="title-divider">
+                <span></span><span class="divider-diamond"></span><span></span>
+            </div>
+            <h2>Alphonse Mucha</h2>
+            <p class="intro-description">
+                A world where nature becomes art, lines come alive,
+                and beauty finds its rhythm.
+            </p>
+            <p class="intro-detail">
+                Emerging in Europe at the turn of the 20th century,
+                Art Nouveau transformed everyday objects, architecture
+                and illustration through flowing organic lines,
+                floral motifs and decorative elegance.
+                Alphonse Mucha became one of its most celebrated
+                artists, known for graceful female figures,
+                intricate ornaments and harmonious compositions.
+            </p>
+            <!-- 注意：这个链接以后可以用来跳转到别的页面 -->
+            <a class="explore-link" href="nouveau.html">
+                <span>EXPLORE THE STYLE</span>
+                <span class="arrow">↗</span>
+            </a>
+        </section>
+
+        <!-- 左下角标签 -->
+        <footer class="gallery-footer" id="gallery-note">
+            <span>ART · NATURE · ELEGANCE</span>
+            <span class="footer-separator">✦</span>
+            <span>AN ART NOUVEAU EXPERIENCE</span>
+        </footer>
+
+        <!-- 屏幕边框 -->
+        <div class="screen-frame" aria-hidden="true"></div>
+    </main>
+
+    <script>
+    // 监听那个超链接的点击
+    document.querySelector('.explore-link').addEventListener('click', function(e) {
+        e.preventDefault(); // 阻止瞬间跳转
+        const url = this.href; // 获取要跳转的链接
+        
+        // 给整个屏幕加上淡出动画
+        document.querySelector('.gallery').classList.add('fade-out');
+        
+        // 等动画播完（0.8秒后），再跳转
+        setTimeout(() => {
+            window.location.href = url;
+        }, 800);
+    });
+</script>
+
+</body>
+</html>

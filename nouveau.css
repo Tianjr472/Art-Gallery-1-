@@ -1,0 +1,393 @@
+/* =========================================
+   基础设置 & 变量
+========================================= */
+:root {
+  --ink: #1c1e18;       /* 稍暗的背景底色 */
+  --cream: #f4e7cb;     /* 奶油色文字 */
+  --gold: #d9b875;      /* 金色 */
+  --muted: rgba(244, 231, 203, .65);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body.nouveau-theme {
+  background-color: var(--ink);
+  color: var(--cream);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  /* 加点极微弱的纸张噪点纹理 */
+  background-image: radial-gradient(circle at center, #24261f 0%, #151712 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+/* =========================================
+   顶部导航栏 (毛玻璃效果)
+========================================= */
+.top-nav {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 4.5%;
+  z-index: 999;
+  
+  /* 毛玻璃 */
+  background: rgba(28, 30, 24, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(217, 184, 117, 0.15);
+}
+
+.nav-logo {
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  font-size: 1.1rem;
+  color: var(--gold);
+}
+
+.nav-links a {
+  color: var(--cream);
+  text-decoration: none;
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  margin-left: 30px;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--gold);
+}
+
+
+/* =========================================
+   首屏：毛玻璃博物馆背景
+========================================= */
+.intro-section {
+  position: relative; /* 关键：为了让内部元素绝对定位 */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* 防止背景图溢出 */
+
+  background-color: #333;
+}
+
+/* 首屏的网格背景层 */
+.gallery-backdrop {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 1;
+  
+  display: grid;
+  /* 规整的四列两行，极度舒适 */
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  padding: 10px;
+}
+
+.gallery-backdrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  /* 去掉所有旋转，规规矩矩铺满 */
+  transform: none; 
+  opacity: 0.6;
+  /* 微微模糊一点点底图，更有纵深感 */
+  filter: blur(2px); 
+}
+
+/* 核心：修改毛玻璃蒙版 */
+.intro-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(8px);
+  
+  /* 🌟 魔法在这里：上面透明，底下全黑，实现完美过渡！ */
+  background: linear-gradient(
+    to bottom, 
+    rgba(28, 30, 24, 0.4) 0%,    /* 顶部半透明 */
+    rgba(28, 30, 24, 0.7) 50%,   /* 中间偏暗 */
+    rgba(28, 30, 24, 1) 100%     /* 底部变成纯黑，完美衔接下一个模块 */
+  );
+}
+
+
+
+/* 首屏文字内容 (必须在毛玻璃之上) */
+.intro-content {
+  position: relative;
+  z-index: 10; /* 层级最高，保证能看清字 */
+  text-align: center;
+  padding: 0 10%;
+  /* 给文字加一点发光，让它从毛玻璃里透出来 */
+  text-shadow: 0px 4px 20px rgba(0,0,0,0.8); 
+}
+
+/* 调整一下标题的排版（和之前一样，不用大改） */
+.intro-content h1 {
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0.05em;
+  margin-bottom: 30px;
+}
+
+.intro-content p {
+  font-size: 1.2rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  color: var(--cream);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+}
+
+/* 滚动提示小动画 */
+.scroll-down-hint {
+  margin-top: 150px;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  animation: bounce 2s infinite;
+
+  position: relative;
+  left: 35px;
+}
+
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+/* =========================================
+   线索板 (Moodboard) 排版
+========================================= */
+.moodboard {
+  padding: 100px 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 150px; /* 模块之间的巨大留白 */
+}
+
+
+.artist-block {
+  position: relative;
+  display: flex;
+  align-items: center; /* 垂直居中 */
+  justify-content: center;
+  gap: 120px; /* 图文之间的巨大留白，显得很宽敞 */
+  padding: 80px 0;
+}
+
+/* 🌟 核心魔法：背景模糊光晕 (让图片背后有一团暖光) */
+.glow-bg {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  height: 50vw;
+  /* 提取穆夏画作里的暖金色 */
+  background: radial-gradient(circle, rgba(217, 184, 117, 0.12) 0%, transparent 65%);
+  z-index: -1;
+  pointer-events: none;
+  filter: blur(30px); /* 极度模糊，形成景深 */
+}
+
+/* 图片容器 */
+.img-container {
+  position: relative;
+  /* 因为图是长条，给它一个相对固定的宽度 */
+  width: 28vw; 
+  max-width: 350px;
+  display: flex;
+  justify-content: center;
+  margin-right: -100px;
+}
+
+/* 图片本身：去掉丑陋的方框，只留画作本身！ */
+.mucha-art {
+  width: 100%;
+  max-height: auto;
+  /* 深邃的阴影，让画作像浮在深渊之上 */
+  filter: drop-shadow(20px 30px 40px rgba(0, 0, 0, 0.8));
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* 鼠标移到画作上，轻微放大，阴影变亮 */
+.mucha-art:hover {
+  transform: scale(1) translateY(-10px);
+  filter: drop-shadow(25px 40px 50px rgba(0, 0, 0, 0.9)) brightness(1.05);
+}
+
+
+/* 文字容器 */
+.text-container {
+  position: relative;
+  max-width: 450px;
+  /* 稍微往下挪一点，制造错落感 */
+  margin-top: 50px; 
+}
+
+/* 🌟 花花体数字：超大，直接压在画作边缘！ */
+.text-container .num {
+  font-family: "Georgia", serif; /* 引入的华丽花体 */
+  color: #d9b875; /* 金色 */
+  font-size: 6rem;
+  line-height: 1;
+  position: absolute;
+  top: -100px;
+  left: -40px; /* 故意向左超出容器，踩在画作的边缘上 */
+  opacity: 1;
+  text-shadow: 2px 5px 20px rgba(0,0,0,0.8);
+  z-index: 2;
+}
+
+/* 标题：极具张力的现代复古衬线体 */
+.text-container h2 {
+  font-family: "Pinyon Script", cursive; /* 引入的华丽花体 */
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  color: #f4e7cb;
+  margin-bottom: 25px;
+}
+
+/* 拆碎的标题容器 */
+.shattered-title {
+  position: relative;
+  height: 400px; /* 给绝对定位留出空间 */
+  margin: 0;
+}
+
+/* 统一的所有词的基础样式 */
+.shattered-title span {
+  font-family: Georgia, serif; /* 极致的Vogue时尚感 */
+  font-size: clamp(4rem, 7vw, 7.5rem); /* 夸张的字号 */
+  font-weight: 400;
+  color: #f4e7cb;
+  /* 🌟 核心：文字带出大块硬阴影，直接盖在屏幕上！ */
+  text-shadow: 10px 10px 0px #1c1e18, 
+               20px 20px 40px rgba(0, 0, 0, 0.9);
+  position: absolute;
+  line-height: 0.8;
+  white-space: nowrap;
+}
+
+/* 单独给每个词绝对定位，排版错乱感！ */
+.shattered-title .word1 {
+  top: -2px;
+  left: -5px;
+  font-family: Georgia, serif; /* The 用花体 */
+  color: #d9b875;
+  font-size: 8rem;
+ 
+}
+
+.shattered-title .word2 {
+  top: 110px;
+  left: 120px; /* 错位 */
+}
+
+.shattered-title .word3 {
+  top: 160px;
+  left: 5px;
+  font-family: "Georgia", serif,; /* of 用干净的无衬线 */
+  font-size: 4rem;
+  color: rgba(244, 231, 203, 0.6);
+}
+
+.shattered-title .word4 {
+  top: 220px;
+  left: 40px;
+
+}
+
+/* 正文排版：做成一个优雅的色块拼贴 */
+.text-container p {
+  font-family: "Inter", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.9;
+  color: rgba(244, 231, 203, 0.8);
+  padding: 30px;
+  background: rgba(136, 142, 124, 0.6);
+  backdrop-filter: blur(3px);
+  border-left: 4px solid #d9b875; /* 左侧加一条金线 */
+  margin-top: 40px;
+  transform: translateX(20px);
+  box-shadow: -10px 10px 30px rgba(0,0,0,0.5);
+}
+
+
+/* =========================================
+   错落反转：偶数区块换个方向
+========================================= */
+.artist-block.reverse {
+  flex-direction: row-reverse;
+}
+.artist-block.reverse .text-container {
+  margin-top: -50px; /* 反向排版时文字往上挪，交错开 */
+  margin-right: -50px;
+  max-width: 400px;
+}
+.artist-block.reverse .text-container .num {
+  left: auto;
+  right: -40px; /* 数字跑到右边去 */
+}
+
+
+/* =========================================
+   底部
+========================================= */
+.page-footer {
+  text-align: center;
+  padding: 80px 0;
+  border-top: 1px solid rgba(217, 184, 117, 0.2);
+}
+
+.page-footer p {
+  font-family: "Inter", sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.back-home {
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 5px;
+}
+
+/* 鼠标跟随的光点 */
+.particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #d9b875; /* 金色 */
+  border-radius: 50%;
+  pointer-events: none; /* 让鼠标可以穿透它 */
+  z-index: 9999;
+  box-shadow: 0 0 10px #d9b875; /* 发光效果 */
+  /* 动画：渐渐缩小并消失 */
+  animation: fadeAndShrink 1s ease-out forwards;
+}
+
+@keyframes fadeAndShrink {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0); opacity: 0; }
+}

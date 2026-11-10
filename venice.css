@@ -1,0 +1,231 @@
+body, html {
+    margin: 0; padding: 0; height: 100%; width: 100%;
+    overflow: hidden;
+    background-color: #000; 
+}
+
+
+
+/* =========================================
+   定格帷幕：拉开后停在两边的透明 PNG
+   ========================================= */
+.final-curtain {
+    position: absolute;
+    top: 0;
+    height: 100vh;
+    width: 45vw; /* 占据屏幕宽度，留出中间 */
+    z-index: 2; /* 在背景之上，文字之下 */
+    
+    /* ⚠️ 注意这里的路径：文件夹/文件名 */
+    background-image: url('Baroque images/curtain-open.png');
+    background-size: cover; /* 让图片铺满这个区域 */
+    background-position: left top; /* 默认贴左上角 */
+    
+    /* 初始隐藏，等过场动画结束再显示 */
+    opacity: 0;
+    animation: curtainFadeIn 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-delay: 1.8s;
+}
+
+.left-final {
+    left: 0;
+    filter: drop-shadow(10px 0 20px rgba(0,0,0,0.8)) brightness(0.6);
+}
+
+/* 右边这个直接镜像反转！ */
+.right-final {
+    right: 0;
+    /* 魔法：水平翻转 */
+    transform: scaleX(-1) scale(1.03); 
+    background-position: left top; /* 翻转后依然贴向屏幕边缘 */
+    filter: drop-shadow(-10px 0 20px rgba(0,0,0,0.8))brightness(0.6);
+    animation-name: curtainFadeInRight;
+  }
+
+@keyframes curtainFadeIn {
+    0% { 
+        opacity: 0; 
+        /* 动画开始时，消除原本的缩放 */
+        transform: scale(1) translateY(10px); 
+    }
+    100% { 
+        opacity: 1; 
+        /* 动画结束时，恢复原始大小和位置 */
+        transform: scale(1) translateY(0); 
+    }
+}
+
+@keyframes curtainFadeInRight {
+    0% { 
+        opacity: 0; 
+        transform: scaleX(-1) scale(1) translateY(10px); 
+    }
+    100% { 
+        opacity: 1; 
+        transform: scaleX(-1) scale(1) translateY(0); 
+    }
+}
+
+
+
+.center-title {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.center-title h1 {
+    color: #f7f5f0;
+    font-family: "Playfair Display", serif;
+    font-size: 6rem; /* 巨大字号 */
+    letter-spacing: 8px;
+    text-shadow: 0 5px 30px rgba(0,0,0,0.9);
+
+    font-family: 'Cinzel', serif;
+    font-weight: 700; /* 用粗体，更有力量感 */
+    text-shadow: 0 5px 30px rgba(0,0,0,0.9), 0 0 20px rgba(212, 175, 55, 0.4); 
+    opacity: 0; /* 初始隐藏 */
+    /* 动画：延迟2秒出现，停留1.5秒，然后用1秒淡出 */
+    animation: centerTextShowAndHide 3.5s ease-in-out forwards;
+    animation-delay: 2s; 
+}
+
+@keyframes centerTextShowAndHide {
+    0% { opacity: 0; transform: scale(0.9); }
+    30% { opacity: 1; transform: scale(1); } /* 淡入并停留 */
+    70% { opacity: 1; transform: scale(1); } /* 保持清晰 */
+    100% { opacity: 0; transform: scale(1.1); } /* 缓缓淡出并放大 */
+}
+
+/* =========================================
+   2. 左下角的毛玻璃面板
+   ========================================= */
+.info-panel {
+    position: absolute;
+    left: 8%; /* 👈 控制离左边的距离 */
+    bottom: 15%; /* 👈 控制离底部的距离 */
+    width: 350px;
+    padding: 40px;
+    
+    /* 毛玻璃特效 */
+    background: rgba(20, 10, 10, 0.5); 
+    backdrop-filter: blur(2px); 
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(212, 175, 55, 0.2);
+    
+    z-index: 5;
+
+    /* 初始隐藏 */
+    opacity: 0;
+    transform: translateY(30px);
+    
+    /* 动画：延迟 4.5s 出现（等正中间的字刚好淡出完），用 1s 滑出 */
+    animation: slideInPanel 1s ease-out forwards;
+    animation-delay: 4.5s; 
+}
+
+@keyframes slideInPanel {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* 毛玻璃内部的文字排版 (直接用之前的) */
+.info-panel .subtitle { color: #d4af37; font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 10px; }
+.info-panel h2 { color: #fff; font-family: "Playfair Display", serif; font-size: 2rem; margin: 0 0 20px 0; }
+.info-panel .desc { color: #ccc; font-size: 0.95rem; line-height: 1.8; margin-bottom: 30px; }
+.explore-btn {
+    color: #d4af37; text-decoration: none; font-size: 0.9rem;
+    letter-spacing: 2px; font-weight: bold;
+    display: inline-flex; align-items: center;
+    border-bottom: 1px solid transparent; transition: all 0.3s ease;
+}
+.explore-btn:hover { color: #fff; border-bottom: 1px solid #d4af37; }
+
+
+
+
+/*顶层：过场动画（完全不用改，保留你的）*/
+.transition-layer { position: absolute; inset: 0; z-index: 10; pointer-events: none; }
+.reveal-curtain {
+    position: absolute; top: 0; height: 100%;
+    background-image: url('Baroque images/curtain-bg.jpg'); 
+    background-size: cover;
+    animation-duration: 2s; 
+    animation-timing-function: cubic-bezier(0.6, 0, 0.2, 1); 
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards; 
+}
+.left-reveal { left: 0; width: 49%; background-position: left center; box-shadow: 10px 0 30px rgba(0,0,0,0.8); animation-name: slideLeft; }
+.right-reveal { right: 0; width: 51%; background-position: right center; box-shadow: -10px 0 30px rgba(0,0,0,0.8); animation-name: slideRight; }
+@keyframes slideLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+@keyframes slideRight { 0% { transform: translateX(0); } 100% { transform: translateX(100%); } }
+
+
+
+/* =========================================
+   照片画廊层基础设定
+   ========================================= */
+.photo-gallery {
+    position: absolute;
+    inset: 0;
+    z-index: 2; /* 在帷幕(2)上面，在文字(3)下面 */
+    pointer-events: none; /* 让鼠标点击能穿透这一层，不影响你点文字 */
+}
+
+.gallery-img {
+    position: absolute; /* 绝对定位，方便你随意放位置 */
+    width: 200px; 
+    height: 280px;
+    object-fit: cover; 
+    
+
+    filter: brightness(0.6) contrast(1.1) sepia(0.2);
+
+    pointer-events: auto; /* 照片本身可以响应鼠标 */
+
+    /* 👇 新增：所有照片统一的初始隐藏状态和淡入动画 👇 */
+    opacity: 0;
+    animation: photoFadeIn 1.5s ease-out forwards;
+    animation-delay: 1.8s;
+    transition: filter 0.5s ease, transform 0.5s ease;
+}
+
+
+
+/* 照片淡入的关键帧 */
+@keyframes photoFadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0; /* 最底层 */
+    
+    /* 只有你的一张图，纯粹干净 */
+    background-image: url('Baroque images/Versailles\ Palace.png'); 
+    background-size: cover; 
+    background-position: center;
+    background-attachment: fixed; 
+
+    /* 适当的明暗，你可以自己调亮度 (0.3 很暗，1 是原图) */
+    filter: brightness(0.4) contrast(1.1) sepia(0.2); 
+    
+    /* ?? 修复“先出来”的问题 ?? */
+    /* 把初始透明度设为0，并且延迟到 2秒 才慢慢出来 */
+    opacity: 0;
+    animation: bgFadeIn 2s ease-out forwards;
+    animation-delay: 2s; 
+}
+
+@keyframes bgFadeIn {
+    0% { opacity: 0; transform: scale(1.05); }
+    100% { opacity: 1; transform: scale(1); }
+}

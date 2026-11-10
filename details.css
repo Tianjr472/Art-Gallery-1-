@@ -1,0 +1,373 @@
+/* =========================================
+   基础设定 & 出场动画 (淡淡的浮现)
+   ========================================= */
+body {
+    margin: 0; padding: 0;
+    background-color: #0d0f0e; /* 极深的墨绿/黑灰色，呼应巴洛克的深沉 */
+    color: #e8e6e1; /* 米白色文字，不刺眼 */
+    font-family: 'Helvetica Neue', sans-serif;
+    line-height: 1.8;
+    overflow-x: hidden;
+}
+
+/* 全局浮现动画：淡淡的，像大雾散去 */
+.fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: gentleFadeUp 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes gentleFadeUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 延迟器，让元素错落有致地浮现 */
+.delay-1 { animation-delay: 0.3s; }
+.delay-2 { animation-delay: 0.6s; }
+
+/* =========================================
+   1. 吸顶导航栏 (和第一页统一)
+   ========================================= */
+.navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: 70px;
+    display: flex;
+    justify-content: space-between; /* 两边推开 */
+    align-items: center;
+    padding: 0 5%;
+    background: rgba(13, 15, 14, 0.8); /* 深色半透明毛玻璃 */
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2); /* 极细的暗金边框 */
+    z-index: 100;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #d4af37; /* 金色字体 */
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.navbar a:hover { color: #fff; }
+.nav-home { font-size: 1.1rem !important; }
+
+/* =========================================
+   大屏开场 (Hero Section)
+   ========================================= */
+.hero-section {
+    position: relative;
+    height: 100vh; /* 占满一整个屏幕 */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* 背景图盒子 */
+.hero-bg-image {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    
+    /* 👇 注意这里的路径和引号！文件名有空格一定要加单引号 👇 */
+    background-image: url('Baroque images/background\ curtain.png'); 
+    
+    background-size: cover;
+    background-position: center;
+    /* 极暗处理，让背景隐入黑暗，文字更清晰 */
+    filter: brightness(0.4) contrast(1.2); 
+}
+
+/* 底部渐变过渡，让背景图自然过渡到你下面的黑底 */
+.hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 400px;
+    background: linear-gradient(to bottom, transparent, #0d0f0e); 
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* 文字内容 */
+.hero-content {
+    position: relative;
+    z-index: 3; /* 保证文字在图片上面 */
+    text-align: center;
+    padding: 0 5%;
+    margin-top: 80px;
+}
+
+/*大屏开场文字排版 */
+
+/* 主标题：The Baroque Era */
+.hero-content h1 {
+    font-family: 'Cinzel', 'Playfair Display', serif;
+    
+    /* ?? 字体大小和粗细 ?? */
+    font-size: 5.5rem; 
+    font-weight: 700; /* 加粗，更有力量感 */
+    
+    /* ?? 颜色：换成了高级的奶油白 ?? */
+    color: #f4ebd9; 
+    
+    margin-bottom: 20px;
+    letter-spacing: 3px; /* 稍微拉开一点字距，更有电影感 */
+    
+    /* ?? 阴影加强，让字从暗背景里“浮”出来 ?? */
+    text-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0,0,0,0.5);
+}
+
+/* 副标题：那句引言 */
+.hero-content p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic; /* 意大利斜体，文艺感拉满 */
+    font-size: 1.3rem;
+    
+    /* ?? 颜色：换成香槟金 ?? */
+    color: #d4af37; 
+    
+    text-shadow: 0 5px 20px rgba(0, 0, 0, 0.9);
+    letter-spacing: 1px;
+}
+
+/* =========================================
+   3. 发展历史 (文字长段落)
+   ========================================= */
+.section-text {
+    padding: 60px 20%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.section-text h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: #d4af37;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+.section-text p {
+    font-size: 1.05rem;
+    color: #bbb;
+    margin-bottom: 25px;
+}
+
+/* =========================================
+   4. 绘画 vs 建筑 (图片与文字的交响)
+   ========================================= */
+.art-architecture-section {
+    padding: 60px 10%;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.art-row {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 100px;
+}
+
+/* 左右交替排列 */
+.art-row.reverse {
+    flex-direction: row-reverse;
+}
+
+.art-image-container {
+    flex: 1;
+    /* 给图片加一个华丽的相框效果 */
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 10px;
+    background: rgba(255,255,255,0.02);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+}
+
+.art-image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: brightness(0.8) contrast(1.2); /* 让画作更显深沉 */
+    transition: filter 0.5s ease;
+}
+
+.art-image-container:hover img {
+    filter: brightness(1) contrast(1.2);
+}
+
+.art-text {
+    flex: 1;
+}
+
+.art-text h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: #f7f5f0;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.art-text .artist {
+    color: #d4af37;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.art-text p {
+    color: #999;
+    line-height: 1.8;
+}
+
+/* =========================================
+   5. 底部对比 (画廊交错排版)
+   ========================================= */
+.comparison-section {
+    padding: 100px 5%;
+    background-color: #0a0c0b; /* 稍微更深一点，包裹住整个画廊 */
+    border-top: 1px solid #222;
+}
+
+.gallery-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap; /* 允许换行 */
+    gap: 60px; /* 左右两个大块的距离 */
+}
+
+/* 每一大块的容器 */
+.era-block {
+    flex: 1;
+    min-width: 400px; /* ?? 核心：如果屏幕小于800px，它会自动变成上下排 */
+    background: #111413;
+    padding: 30px;
+    border: 1px solid #222;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+/* 标题区 */
+.era-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333;
+}
+
+.era-header h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    margin: 0 0 5px 0;
+    color: #f7f5f0;
+}
+
+.era-header span {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #888;
+    font-size: 1rem;
+}
+
+/* 洛可可标题颜色微调 */
+.rococo .era-header h2 {
+    color: #d4af37;
+}
+
+/* 内容区 */
+.era-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 单张大图容器 */
+.era-main-image {
+    flex: 1;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 5px;
+    background: rgba(0,0,0,0.5);
+}
+
+.era-main-image img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+}
+
+.img-caption {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #888;
+    margin: 8px 0 0 0;
+    font-family: 'Playfair Display', serif;
+}
+
+/* 洛可可的两张图并排 */
+.era-img-group {
+    display: flex;
+    gap: 10px;
+}
+
+.era-img-group .era-main-image img {
+    height: 200px; /* 并排时稍微矮一点 */
+}
+
+/* 专属引言 */
+.era-quote {
+    font-size: 0.85rem;
+    color: #999;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    line-height: 1.6;
+    margin: 0;
+    padding-left: 15px;
+    border-left: 2px solid #d4af37;
+}
+
+/* 列表文字 */
+.era-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+    color: #999;
+}
+
+.era-list li {
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    border-bottom: 1px solid #222;
+    padding-bottom: 12px;
+}
+
+.era-list li:last-child { border-bottom: none; }
+
+.era-list strong {
+    color: #e8e6e1;
+    font-family: 'Cinzel', serif;
+    margin-right: 10px;
+}
+
+/* ?? 手机端适配：当屏幕极度窄时，两张并排的图变成上下 */
+@media (max-width: 600px) {
+    .era-block { min-width: 100%; padding: 20px; }
+    .era-img-group { flex-direction: column; }
+    .era-img-group .era-main-image img { height: 250px; }
+}
+
+
+/* 手机端适配 */
+@media (max-width: 900px) {
+    .art-row, .art-row.reverse { flex-direction: column; gap: 30px; }
+    .comparison-container { flex-direction: column; }
+    .hero-intro h1 { font-size: 3rem; }
+    .section-text { padding: 40px 10%; }
+}
