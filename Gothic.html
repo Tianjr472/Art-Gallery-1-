@@ -7,101 +7,54 @@
 </head>
 <body>
 
-    <!-- 1. 纯黑底色 -->
+    <!-- 纯黑底色 -->
     <div style="position: absolute; inset: 0; background-color: #050505; z-index: -1;"></div>
 
-    <!-- ==================== 左右对称的彩窗 (z-index: 1) ==================== -->
-    
-    <!-- 左侧彩窗 -->
-    <img class="anim-fade-up" src="Gothic images/window.png" style="
-        position: absolute; 
-        top: 10%; 
-        left: 50%;
-        margin-left: -38vw; /* 向左偏移 */
-        width: 22vw; 
-        height: auto;
-        z-index: 1;
-        filter: brightness(0.8) drop-shadow(0 0 30px rgba(255,255,255,0.2));
+    <!-- 左右对称彩窗 -->
+    <img class="img-window-left" src="Gothic images/window.png" style="
+        position: absolute; top: 10%; left: 50%; margin-left: -38vw; width: 22vw; height: auto; z-index: 1; filter: brightness(0.8) drop-shadow(0 0 30px rgba(255,255,255,0.2));
+    ">
+    <img class="img-window-right" src="Gothic images/window(1).jpg" style="
+        position: absolute; top: 10%; left: 50%; margin-left: 16vw; width: 22vw; height: auto; z-index: 1; filter: brightness(0.8) drop-shadow(0 0 30px rgba(255,255,255,0.2));
     ">
 
-    <!-- 右侧彩窗 -->
-    <img class="anim-fade-up" src="Gothic images/window(1).jpg" style="
-        position: absolute; 
-        top: 10%; 
-        left: 50%;
-        margin-left: 16vw; /* 向右偏移 */
-        width: 22vw; 
-        height: auto;
-        z-index: 1;
-        filter: brightness(0.8) drop-shadow(0 0 30px rgba(255,255,255,0.2));
+    <!-- 不可名状暗影 angel(2) -->
+    <img class="img-shadow" src="Gothic images/angel(2).png" style="
+        position: absolute; top: 0%; left: 50%; margin-left: -35vw; width: 70vw; height: auto; filter: brightness(0.3) drop-shadow(0 0 30px rgba(255,255,255,0.2)); z-index: 3;
     ">
 
-
-    <!-- ==================== 不可名状暗影 angel(2) (z-index: 3) ==================== -->
-    <!-- 搞巨大！70vw！居中！ -->
-    <img class="anim-fade-up" src="Gothic images/angel(2).png" style="
-        position: absolute; 
-        top: 0%; 
-        left: 50%;  
-        margin-left: -35vw; /* 70的一半 */
-        width: 70vw; /* 极其庞大，从大天使背后展开 */
-        height: auto; 
-        filter: brightness(0.3) drop-shadow(0 0 30px rgba(255,255,255,0.2));
-        z-index: 3;
+    <!-- 大天使 angel(1) (往上挪了！) -->
+    <img class="img-angel" src="Gothic images/angel(1).png" style="
+        position: absolute; bottom: 5vh; left: 50%; margin-left: -20vw; width: 40vw; height: auto; z-index: 4; filter: drop-shadow(0 0 20px rgba(0,0,0,0.9));
     ">
 
-    <!-- ==================== 前景大天使 angel(1) (z-index: 4) ==================== -->
-    <!-- 小一点！40vw！居中！ -->
-    <img class="anim-drop-in" src="Gothic images/angel(1).png" style="
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        margin-left: -20vw; /* 40的一半 */
-        width: 40vw; /* 缩小，让背后的暗影露出来 */
-        height: auto;
-        z-index: 4;
-        filter: drop-shadow(0 0 20px rgba(0,0,0,0.9));
+    <!-- 两侧尖塔 -->
+    <img class="img-church-left" src="Gothic images/church(1).png" style="
+        position: absolute; bottom: -5vh; left: 0; height: 110vh; width: auto; z-index: 5; filter: brightness(0.6) contrast(1.2);
+    ">
+    <img class="img-church-right" src="Gothic images/church(2).png" style="
+        position: absolute; bottom: -5vh; right: 0; height: 110vh; width: auto; z-index: 5; filter: brightness(0.6) contrast(1.2);
     ">
 
-    <!-- ==================== 尖塔 (z-index: 5) ==================== -->
-    <img class="anim-slide-left" src="Gothic images/church(1).png" style="
-        position: absolute; 
-        bottom: -5vh; 
-        left: 0; 
-        height: 110vh; 
-        width: auto;
-        z-index: 5;
-        filter: brightness(0.6) contrast(1.2);
-    ">
-
-    <img class="anim-slide-right" src="Gothic images/church(2).png" style="
-        position: absolute; 
-        bottom: -5vh; 
-        right: 0;
-        height: 110vh; 
-        width: auto;
-        z-index: 5;
-        filter: brightness(0.6) contrast(1.2);
-    ">
-
-    <!-- ==================== 字体 (z-index: 10) ==================== -->
-    <img class="anim-zoom-in" src="Gothic images/text.png" style="
-        position: absolute;
-        top: 2%; /* 高高在上 */
-        left: 50%;
-        margin-left: -30vw; 
-        width: 60vw; 
-        z-index: 10;
-        filter: drop-shadow(0 15px 20px rgba(0,0,0,0.9));
+    <!-- 字体 -->
+    <img class="img-text" src="Gothic images/text.png" style="
+        position: absolute; top: 2%; left: 50%; margin-left: -30vw; width: 60vw; z-index: 10; filter: drop-shadow(0 15px 20px rgba(0,0,0,0.9));
     ">
 
     <!-- 毛玻璃按钮 -->
-    <a href="Gothic-detail.html" class="explore-btn anim-fade-in">
+    <a href="Gothic-detail.html" class="explore-btn">
         ENTER THE DARKNESS <span>↗</span>
     </a>
 
-    <!-- 暗角滤镜 -->
+    <!-- 暗角 -->
     <div class="vignette-overlay"></div>
+
+    <script>
+    // 网页加载完成后，给 body 加一个 loaded 类，瞬间触发所有 CSS 动画
+    window.addEventListener('load', () => {
+        document.body.classList.add('loaded');
+    });
+</script>
 
 </body>
 </html>

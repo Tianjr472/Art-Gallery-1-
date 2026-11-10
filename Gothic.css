@@ -1,28 +1,5 @@
-@font-face {
-    font-family: 'MyGothicFont'; /* 这个是你给字体起的名字，随便叫 */
-    src: url('fonts/GothicFont.ttf') format('truetype'); /* 注意这里的路径要对应你的文件名！ */
-}
-
-/* 基础重置 */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { background-color: #050505; overflow: hidden; height: 100vh; width: 100vw; }
-
-/* 图片防拖拽 */
-.gallery-img { pointer-events: none; }
-
-/* 背景层占位 */
-.hero-bg {
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%;
-    object-fit:cover;
-    background: radial-gradient(circle at center, #111 0%, #000 100%);
-    z-index: 0;
-}
-
-
 
 /* =========================================
    毛玻璃按钮
@@ -32,27 +9,25 @@ body { background-color: #050505; overflow: hidden; height: 100vh; width: 100vw;
     bottom: 8vh; right: 5vw;
     z-index: 10;
     padding: 15px 30px;
-    color: #ddd;
+    color: #fff;
     text-decoration: none;
-    font-family: 'Cinzel', serif;
+    font-family: 'Times New Roman', serif;
     font-size: 14px; letter-spacing: 2px;
     
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px); 
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.5); 
     transition: all 0.4s ease;
 }
 .explore-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.2);
     border-color: #fff;
-    color: #fff;
     transform: scale(1.05);
 }
 
-/* =========================================
-   暗角 (让四周变黑，聚焦中间)
-   ========================================= */
+/* 暗角 */
 .vignette-overlay {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     box-shadow: inset 0 0 150px 80px #000;
@@ -61,42 +36,65 @@ body { background-color: #050505; overflow: hidden; height: 100vh; width: 100vw;
 }
 
 /* =========================================
-   出场动画顺序控制
+   ?? 灵魂动画回归 (使用 transform 配合 margin)
    ========================================= */
 
-/* 动画基础设定 */
-.anim-fade-up, .anim-slide-left, .anim-slide-right, .anim-drop-in, .anim-zoom-in, .anim-fade-in {
-    opacity: 0; /* 初始隐藏 */
-    animation-fill-mode: forwards; /* 保持动画结束状态 */
-    animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+/* 基础状态：全部隐藏 */
+.img-window-left, .img-window-right, .img-shadow, .img-angel, .img-church-left, .img-church-right, .img-text {
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
     animation-duration: 1.5s;
 }
 
-/* 1. 左右尖塔 (最先出) */
-@keyframes slideLeft { 
-    0% { opacity: 0; transform: translateY(150px); } /* 初始在下面150px的位置 */
-    100% { opacity: 1; transform: translateY(0); }    /* 升上来 */
+/* 1. 尖塔从下面升上来 */
+@keyframes slideUp {
+    0% { opacity: 0; transform: translateY(150px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
-@keyframes slideRight { 
-    0% { opacity: 0; transform: translateY(150px); } 
-    100% { opacity: 1; transform: translateY(0); } 
+.img-church-left, .img-church-right {
+    animation-name: slideUp;
+    animation-delay: 0.2s;
 }
 
-.anim-slide-left { animation-name: slideLeft; animation-delay: 0.2s; }
-.anim-slide-right { animation-name: slideRight; animation-delay: 0.2s; }
+/* 2. 彩窗和暗影浮现 */
+@keyframes fadeUpSoft {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+.img-window-left, .img-window-right, .img-shadow {
+    animation-name: fadeUpSoft;
+    animation-delay: 1.0s;
+}
 
-/* 2. 彩窗 + 圣光 (接着出) */
-@keyframes fadeUp { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
-.anim-fade-up { animation-name: fadeUp; animation-delay: 1.0s; }
+/* 3. 大天使砸下来 (注意这里我们不用 translateY 覆盖 margin) */
+@keyframes dropDown {
+    0% { opacity: 0; transform: translateY(-50px) scale(1.05); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.img-angel {
+    animation-name: dropDown;
+    animation-delay: 1.8s;
+    /* 加上一点点模糊感，砸下来的时候更神圣 */
+    filter: drop-shadow(0 0 20px rgba(0,0,0,0.9));
+}
 
-/* 3. 天使 (掉下来) */
-@keyframes dropIn { 0% { opacity: 0; transform: translateY(-50px); } 100% { opacity: 1; transform: translateY(0); } }
-.anim-drop-in { animation-name: dropIn; animation-delay: 1.8s; }
+/* 4. 巨大字体像镜头对焦一样冲出来 */
+@keyframes zoomInBlur {
+    0% { opacity: 0; transform: scale(1.2); filter: blur(10px); }
+    100% { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+.img-text {
+    animation-name: zoomInBlur;
+    animation-delay: 2.8s;
+}
 
-/* 4. 字体 (巨大化冲出来) */
-@keyframes zoomIn { 0% { opacity: 0; transform: scale(1.2); filter: blur(10px); } 100% { opacity: 1; transform: scale(1); filter: blur(0); } }
-.anim-zoom-in { animation-name: zoomIn; animation-delay: 2.8s; }
-
-/* 5. 按钮 (最后淡入) */
-@keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
-.anim-fade-in { animation-name: fadeIn; animation-delay: 3.5s; }
+/* 5. 毛玻璃按钮最后淡入 */
+@keyframes justFade {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+.explore-btn {
+    opacity: 0;
+    animation: justFade 1s ease 3.5s forwards;
+}
